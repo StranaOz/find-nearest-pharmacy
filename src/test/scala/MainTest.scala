@@ -5,7 +5,7 @@ class MainTest extends FlatSpec with Matchers {
   import Main._
   import OrgsSorter._
 
-  "OrgsSorter" should "with some organization as target parameter return this organization at first place" in {
+  "OrgsSorter" should "with some organization as target parameter return this organization at first place and 'nearest' at second" in {
 
     val data = """Адонис, ООО, аптека|Зорге, 25|82.902529628935|54.935396634793
                  |Аптека, ООО Вектор-Фарм|Кольцово пос, 12а|83.185112379498|54.940230106559
@@ -15,12 +15,18 @@ class MainTest extends FlatSpec with Matchers {
                  |Сибирь-Фарм, аптека|Гидромонтажная, 50|82.978398028667|54.860945509599
                  |Витана, аптечная сеть|Комсомольская, 19|83.302859560299|54.642989879376
                  |Витана, аптечная сеть|Индустриальный микрорайон, 24|83.302476474196|54.625007087376""".stripMargin
-
     val orgs = data.split('\n').map(lineToOrganizationData)
+
     val sibFarm = orgs(5)
-    val sortedOrgs = orgs.sortWith(compareWithTarget(sibFarm.length, sibFarm.width))
+    val oneMeterInRadians = 1.6E-7
+    val nearestOrg = OrganizationData("nearestOrg", "address", sibFarm.length, sibFarm.width + oneMeterInRadians)
+
+//    val oneMeter = calcDistance(sibFarm.length, sibFarm.width, nearestOrg.length, nearestOrg.width)
+
+    val sortedOrgs = ( orgs :+ nearestOrg).sortWith(compareWithTarget(sibFarm.length, sibFarm.width))
 
     sortedOrgs(0).name should be(sibFarm.name)
+    sortedOrgs(1).name should be(nearestOrg.name)
   }
 
 }

@@ -55,7 +55,7 @@ case class OrganizationData(name: String, address: String, length: Double, width
 
 object OrgsSorter {
 
-  val RADIUS_OF_THE_EARTH = 6372795;
+  val RADIUS_OF_THE_EARTH = 6372795.0
 
   /**
    * @return ближайшую организацию к указанным долготе и широте
