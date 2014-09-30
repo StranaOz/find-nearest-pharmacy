@@ -4,7 +4,7 @@ object Main extends App {
 
   import OrgsSorter._
 
-  var params = parseCmdLineParams
+  val params = parseCmdLineParams
   val orgs = io.Source.fromFile(params.srcFile).getLines().drop(1).map(lineToOrganizationData).toList
 
   val sortedOrgs = orgs.sortWith(compareWithTarget(params.length, params.width))
