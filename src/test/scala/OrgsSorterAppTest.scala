@@ -1,8 +1,8 @@
 import org.scalatest._
 
-class MainTest extends FlatSpec with Matchers {
+class OrgsSorterAppTest extends FlatSpec with Matchers {
 
-  import Main._
+  import OrgsSorterApp._
   import OrgsSorter._
 
   "OrgsSorter" should "with some organization as target parameter return this organization at first place and 'nearest' at second" in {

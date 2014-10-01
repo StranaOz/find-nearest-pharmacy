@@ -1,6 +1,6 @@
 import scala.math._
 
-object Main extends App {
+object OrgsSorterApp extends App {
 
   import OrgsSorter._
 
